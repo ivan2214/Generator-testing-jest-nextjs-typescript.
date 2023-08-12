@@ -24,6 +24,12 @@ module.exports = class extends Generator {
         default: "pnpm",
         when: answers => answers.installDependencies,
         filter: choice => choice.toLowerCase()
+      },
+      {
+        type: "confirm",
+        name: "createTestsFolder",
+        message: "¿Deseas crear una carpeta __tests__ en la raíz del proyecto?",
+        default: true
       }
     ];
 
@@ -83,5 +89,9 @@ module.exports = createJestConfig(customJestConfig);
 `;
 
     this.fs.write(this.destinationPath("jest.config.js"), jestConfigContent);
+
+    if (this.props.createTestsFolder) {
+      this.fs.mkdir(this.destinationPath("__tests__"));
+    }
   }
 };
