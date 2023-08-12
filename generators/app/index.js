@@ -46,7 +46,11 @@ module.exports = class extends Generator {
       ];
 
       const packageManager = this.props.packageManager || "pnpm";
-      this.spawnCommandSync(packageManager, ["install", ...dependencies]);
+      this.spawnCommandSync(packageManager, [
+        "install",
+        "--save-dev",
+        ...dependencies
+      ]);
     }
   }
 
