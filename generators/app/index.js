@@ -89,11 +89,10 @@ module.exports = createJestConfig(customJestConfig);
 `;
 
     this.fs.write(this.destinationPath("jest.config.js"), jestConfigContent);
-
     if (this.props.createTestsFolder) {
       this.fs.copyTpl(
-        this.templatePath("__tests__"),
-        this.destinationPath("__tests__")
+        this.templatePath("empty.txt"),
+        this.destinationPath("__tests__/test1.test.ts")
       );
     }
   }
