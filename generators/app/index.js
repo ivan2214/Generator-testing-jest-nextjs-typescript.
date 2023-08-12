@@ -88,7 +88,12 @@ const customJestConfig: Config = {
 module.exports = createJestConfig(customJestConfig);
 `;
 
-    this.fs.write(this.destinationPath("jest.config.js"), jestConfigContent);
+    const jestSetupContent = `
+    import "@testing-library/jest-dom"
+`;
+
+    this.fs.write(this.destinationPath("jest.config.ts"), jestConfigContent);
+    this.fs.write(this.destinationPath("jest.setup.ts"), jestSetupContent);
     if (this.props.createTestsFolder) {
       this.fs.copyTpl(
         this.templatePath("empty.txt"),
