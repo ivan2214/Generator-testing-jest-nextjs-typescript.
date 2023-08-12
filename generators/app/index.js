@@ -91,7 +91,10 @@ module.exports = createJestConfig(customJestConfig);
     this.fs.write(this.destinationPath("jest.config.js"), jestConfigContent);
 
     if (this.props.createTestsFolder) {
-      this.fs.mkdir(this.destinationPath("__tests__"));
+      this.fs.copyTpl(
+        this.templatePath("__tests__"),
+        this.destinationPath("__tests__")
+      );
     }
   }
 };
