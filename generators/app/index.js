@@ -105,7 +105,7 @@ module.exports = createJestConfig(customJestConfig);
 
     if (this.props.createTestsFolder) {
       this.fs.copyTpl(
-        this.templatePath("empty.txt"),
+        this.templatePath("test1.test.ts"),
         this.destinationPath("__tests__/test1.test.ts")
       );
     }
