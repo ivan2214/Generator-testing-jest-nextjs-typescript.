@@ -1,6 +1,6 @@
 # generator-ivan-testing [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 
-> instalador de dependencia y creacion de archivo jeest en neexjts y typescript
+> instalador de dependencia y creacion de archivos jest.config.ts y jest.setup.ts  en nexjts y typescript
 
 ## Installation
 
