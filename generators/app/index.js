@@ -30,6 +30,13 @@ module.exports = class extends Generator {
         name: "createTestsFolder",
         message: "¿Deseas crear una carpeta __tests__ en la raíz del proyecto?",
         default: true
+      },
+      {
+        type: "confirm",
+        name: "addTestScripts",
+        message:
+          "¿Deseas agregar los scripts de prueba al package.json? Si acepta aparece el siguiente mensaje ( Overwrite package.json?) presione enter y luego la letra Y, presione enter",
+        default: true
       }
     ];
 
@@ -93,12 +100,25 @@ module.exports = createJestConfig(customJestConfig);
 `;
 
     this.fs.write(this.destinationPath("jest.config.ts"), jestConfigContent);
+
     this.fs.write(this.destinationPath("jest.setup.ts"), jestSetupContent);
+
     if (this.props.createTestsFolder) {
       this.fs.copyTpl(
         this.templatePath("empty.txt"),
         this.destinationPath("__tests__/test1.test.ts")
       );
+    }
+
+    if (this.props.addTestScripts) {
+      const packageJsonPath = this.destinationPath("package.json");
+      const packageJson = this.fs.readJSON(packageJsonPath) || {};
+      packageJson.scripts = packageJson.scripts || {};
+
+      packageJson.scripts.test = "jest --watchAll";
+      packageJson.scripts["test-single"] = "jest --watchAll";
+
+      this.fs.writeJSON(packageJsonPath, packageJson);
     }
   }
 };
